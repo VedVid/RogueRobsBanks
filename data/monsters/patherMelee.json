@@ -1,0 +1,25 @@
+{
+    "Char":"T",
+    "Name":"enemy4",
+    "Color":"#808000",
+    "ColorDark":"#808000",
+    "Layer":5,
+	"AlwaysVisible":false,
+    "Blocked":true,
+    "BlocksSight":false,
+    "AIType":3,
+    "AITriggered":false,
+    "HPMax":1,
+    "HPCurrent":1,
+    "Attack":1,
+    "Defense":1,
+    "Equipment":[
+        null,
+        null,
+        null
+    ],
+    "Inventory":[
+        null
+    ],
+	"ActiveWeapon": 2
+}

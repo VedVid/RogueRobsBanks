@@ -1,0 +1,20 @@
+{
+    "Char":"|",
+    "Name":"Winchester M1886",
+    "Color":"#91A3B0",
+    "ColorDark":"#91A3B0",
+    "Layer":4,
+	"AlwaysVisible":true,
+    "Blocked":false,
+    "BlocksSight":false,
+    "Pickable":true,
+    "Equippable":true,
+    "Consumable":false,
+    "Slot":0,
+    "Use":0,
+	"Ranges": [10, 55, 80],
+	"AmmoMax": 9,
+	"AmmoCurrent": 9,
+	"Cock": false,
+	"Cocked": false
+}

@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2020, Tomasz "VedVid" Nowakowski
 All rights reserved.
 
@@ -21,3 +22,52 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+package main
+
+import (
+	"runtime"
+	"strconv"
+
+	blt "bearlibterminal"
+)
+
+const (
+	// Setting BearLibTerminal window.
+	WindowSizeX = 63
+	WindowSizeY = 25
+	MapSizeX    = 40
+	MapSizeY    = 20
+	UIPosX      = MapSizeX + 1
+	UIPosY      = 0
+	UISizeX     = WindowSizeX - MapSizeX
+	UISizeY     = WindowSizeY - LogSizeY
+	LogSizeX    = WindowSizeX
+	LogSizeY    = WindowSizeY - MapSizeY
+	LogPosX     = 0
+	LogPosY     = MapSizeY
+	GameTitle   = "Rogue Robs Trains v0.0.4"
+	FontName    = "Deferral-Square.ttf"
+	FontSize    = 14
+)
+
+func constrainThreads() {
+	/* Constraining processor and threads is necessary,
+	   because BearLibTerminal often crashes otherwise. */
+	runtime.GOMAXPROCS(1)
+	runtime.LockOSThread()
+}
+
+func InitializeBLT() {
+	/* Constraining threads and setting BearLibTerminal window. */
+	constrainThreads()
+	blt.Open()
+	sizeX, sizeY := strconv.Itoa(WindowSizeX), strconv.Itoa(WindowSizeY)
+	sizeFont := strconv.Itoa(FontSize)
+	window := "window: size=" + sizeX + "x" + sizeY
+	blt.Set(window + ", title=' " + GameTitle + "'; font: " + FontName + ", size=" + sizeFont)
+	SetBkColor("black")
+	blt.Clear()
+	blt.Refresh()
+}
