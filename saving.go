@@ -74,7 +74,7 @@ func NilToObject() *Object {
 	placeholder := &Object{BasicProperties{0, 0, "o", ObjectNilPlaceholder,
 		"black", "black"},
 		VisibilityProperties{0, false},
-		CollisionProperties{false, false},
+		CollisionProperties{false, false, false},
 		ObjectProperties{false, false, false, 0, 0},
 		[]int{0, 0, 0}, 0, 0, false, false}
 	return placeholder

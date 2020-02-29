@@ -53,6 +53,7 @@ type CollisionProperties struct {
 	   if it blocks creature sight, etc. */
 	Blocked     bool
 	BlocksSight bool
+	BlocksShots bool
 }
 
 type FighterProperties struct {

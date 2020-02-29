@@ -55,6 +55,7 @@ type MapJson struct {
 	Explored       map[string]bool
 	Blocked        map[string]bool
 	BlocksSight    map[string]bool
+	BlocksShots    map[string]bool
 	MonstersCoords [][]int
 	MonstersTypes  []string
 }
@@ -76,7 +77,7 @@ var stoneColors = []string{
 }
 
 func NewTile(layer, x, y int, character, name, color, colorDark string,
-	alwaysVisible, explored, blocked, blocksSight bool) (*Tile, error) {
+	alwaysVisible, explored, blocked, blocksSight, blocksShots bool) (*Tile, error) {
 	/* Function NewTile takes all values necessary by its struct,
 	   and creates then returns Tile. */
 	var err error
@@ -95,7 +96,7 @@ func NewTile(layer, x, y int, character, name, color, colorDark string,
 	tileBasicProperties := BasicProperties{x, y, character, name, color,
 		colorDark}
 	tileVisibilityProperties := VisibilityProperties{layer, alwaysVisible}
-	tileCollisionProperties := CollisionProperties{blocked, blocksSight}
+	tileCollisionProperties := CollisionProperties{blocked, blocksSight, blocksShots}
 	tileNew := &Tile{tileBasicProperties, tileVisibilityProperties,
 		explored, tileCollisionProperties}
 	return tileNew, err
@@ -116,7 +117,7 @@ func InitializeEmptyMap() Board {
 		for y := 0; y < MapSizeY; y++ {
 			var err error
 			b[x][y], err = NewTile(BoardLayer, x, y, ".", "floor", "light gray",
-				"dark gray", true, false, false, false)
+				"dark gray", true, false, false, false, false)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -262,6 +263,7 @@ func ReplaceTile(t *Tile, s string, m *MapJson) {
 	t.Explored = m.Explored[s]
 	t.Blocked = m.Blocked[s]
 	t.BlocksSight = m.BlocksSight[s]
+	t.BlocksShots = m.BlocksShots[s]
 }
 
 func LoadJsonMap(mapFile string) (Board, Creatures, error) {

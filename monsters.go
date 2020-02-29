@@ -480,6 +480,7 @@ func (c *Creature) Die(o *Objects) {
 	c.Char = CorpseChar
 	c.Blocked = false
 	c.BlocksSight = false
+	c.BlocksShots = true
 	c.AIType = NoAI
 	c.DropFromEquipment(o, c.ActiveWeapon)
 	ZeroLastTarget(c)
