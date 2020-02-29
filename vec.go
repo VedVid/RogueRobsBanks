@@ -215,7 +215,7 @@ Loop:
 				break Loop
 			}
 		}
-		if b[x][y].BlocksShots == true {
+		if b[x][y].BlocksSight == true {
 			// Breaks on blocked tiles.
 			tile = b[x][y]
 			break

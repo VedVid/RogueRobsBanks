@@ -69,8 +69,8 @@ const (
 
 const (
 	// Ranges of weapons.
-	RangeShort  = 10
-	RangeMedium = 20
+	RangeShort  = 5
+	RangeMedium = 15
 	RangeLong   = 30
 )
 
