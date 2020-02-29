@@ -356,6 +356,7 @@ func LoadJsonMap(mapFile string) (Board, Creatures, error) {
 				continue
 			}
 		}
+		fmt.Println("x:",coords[k][0], "  y:", coords[k][1])
 		monster, err := NewCreature(coords[k][0], coords[k][1], aitype)
 		if err != nil {
 			fmt.Println(err)
@@ -373,29 +374,31 @@ func LoadJsonMap(mapFile string) (Board, Creatures, error) {
 				n = 2
 			}
 		}
-		for x := area[0]; x < area[0]+area[2]; x++ {
-			for y := area[1]; y < area[1]+area[3]; y++ {
-				if n == 0 {
-					goto Areas
+		chances := 30
+		for {
+			if n == 0 || chances == 0 {
+				goto Areas
+			}
+			x := RandRange(area[0], area[0]+area[2]-1)
+			y := RandRange(area[1], area[1]+area[3]-1)
+			if thisMap[x][y].Blocked == false && thisMap[x][y].BlocksSight == false {
+				chances := 50
+				if Config.Monsters == MonstersEasy {
+					chances = 25
+				} else if Config.Monsters == MonstersHard {
+					chances = 75
 				}
-				if thisMap[x][y].Blocked == false && thisMap[x][y].BlocksSight == false {
-					chances := 50
-					if Config.Monsters == MonstersEasy {
-						chances = 25
-					} else if Config.Monsters == MonstersHard {
-						chances = 75
+				if RandInt(100) <= chances {
+					aitype := enemies[RandRange(0, len(enemies)-1)]
+					monster, err := NewCreature(x, y, aitype)
+					if err != nil {
+						fmt.Println(err)
 					}
-					if RandInt(100) <= chances {
-						aitype := enemies[RandRange(0, len(enemies)-1)]
-						monster, err := NewCreature(x, y, aitype)
-						if err != nil {
-							fmt.Println(err)
-						}
-						creatures = append(creatures, monster)
-						n--
-					}
+					creatures = append(creatures, monster)
+					n--
 				}
 			}
+			chances--
 		}
 	Areas:
 		continue
