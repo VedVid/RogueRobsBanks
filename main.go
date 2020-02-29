@@ -221,13 +221,13 @@ func NewGame(b *Board, c *Creatures, o *Objects) {
 		fmt.Println(err)
 	}
 	*o = Objects{}
-	*b, *c, err = LoadJsonMap("trainStart.json")
+	*b, *c, err = LoadJsonMap("bank001.json")
 	if err != nil {
 		fmt.Println(err)
 	}
 	(*c)[0].Equipment = Objects{playerPrimary, playerSecondary, playerMelee}
 	G.LevelInt = 0
-	G.Levels = []string{"trainStart.json"}
+	G.Levels = []string{"bank001.json"}
 	var middleLevels = []string{"train1.json", "train2.json", "train3.json", "train4.json"}
 	rand.Shuffle(len(middleLevels), func(i, j int) {
 		middleLevels[i], middleLevels[j] = middleLevels[j], middleLevels[i]
